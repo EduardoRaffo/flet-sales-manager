@@ -5,6 +5,7 @@ from importer import import_csv_to_db
 from analysis import get_sales_summary
 from components.resumen_card import ResumenCard
 from components.tabla_resumen import TablaResumen
+from components.mostrar_grafico import GraficoVentas
 
 
 class VentasView(ft.Column):
@@ -14,6 +15,7 @@ class VentasView(ft.Column):
 
         self.output = ft.Text(size=14)
         self.summary_container = ft.Container()
+        self.chart_container = ft.Container()  # <<--- contenedor para el gráfico
 
         self.upload_picker = ft.FilePicker(on_result=self.handle_file)
         page.overlay.append(self.upload_picker)
@@ -34,14 +36,21 @@ class VentasView(ft.Column):
                         icon=ft.Icons.SHOW_CHART,
                         on_click=self.show_summary,
                     ),
+                    ft.ElevatedButton(
+                        "Ver gráfico",
+                        icon=ft.Icons.INSERT_CHART,
+                        on_click=self.show_chart,
+                    ),
                 ],
                 spacing=10,
             ),
             self.summary_container,
+            self.chart_container,  # <<--- añadido al layout
             self.output,
         ]
 
     def open_file_picker(self):
+        """Método utilizable desde el dashboard para abrir el selector."""
         self.upload_picker.pick_files(allow_multiple=False)
 
     # 📥 Importación de CSV/Excel
@@ -54,7 +63,7 @@ class VentasView(ft.Column):
         file = e.files[0]
         file_path = file.path
 
-        if not os.path.exists(file_path):
+        if not file_path or not os.path.exists(file_path):
             self.output.value = "❌ Error leyendo el archivo."
             self.page.update()
             return
@@ -84,4 +93,24 @@ class VentasView(ft.Column):
         card = ResumenCard(promedio)
 
         self.summary_container.content = ft.Column([tabla, card], spacing=20)
+        self.page.update()
+
+    # 📈 Mostrar gráfico
+    def show_chart(self, e=None):
+        try:
+            df, promedio = get_sales_summary()
+        except Exception as ex:
+            self.output.value = f"❌ Error: {ex}"
+            self.page.update()
+            return
+
+        if df is None or df.is_empty():
+            self.chart_container.content = None
+            self.output.value = "⚠ No hay datos para graficar."
+            self.page.update()
+            return
+
+        rows = df.rows()
+
+        self.chart_container.content = GraficoVentas(rows)
         self.page.update()
