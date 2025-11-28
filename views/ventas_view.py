@@ -1,11 +1,10 @@
 import os
-import flet as ft
-
 from importer import import_csv_to_db
 from analysis import get_sales_summary
 from components.resumen_card import ResumenCard
 from components.tabla_resumen import TablaResumen
 from components.mostrar_grafico import GraficoVentas
+import flet as ft
 
 
 class VentasView(ft.Column):
@@ -14,8 +13,33 @@ class VentasView(ft.Column):
         self.page = page
 
         self.output = ft.Text(size=14)
-        self.summary_container = ft.Container()
-        self.chart_container = ft.Container()  # <<--- contenedor para el gráfico
+        self.summary_container = ft.Container(
+            expand=True,
+            content=ft.Column(
+                [ft.Text("📊 Carga datos para ver el resumen", size=16, color=ft.Colors.GREY)],
+                expand=True,
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            )
+        )
+        self.chart_container = ft.Container(
+            expand=True,
+            content=ft.Column(
+                [ft.Text("📈 Carga datos para ver el gráfico", size=16, color=ft.Colors.GREY)],
+                expand=True,
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            )
+        )
+        self.main_row = ft.Row(
+            [
+                self.summary_container,
+                self.chart_container,
+            ],
+            spacing=20,
+            expand=True,
+            wrap=False,
+        )
 
         self.upload_picker = ft.FilePicker(on_result=self.handle_file)
         page.overlay.append(self.upload_picker)
@@ -44,8 +68,7 @@ class VentasView(ft.Column):
                 ],
                 spacing=10,
             ),
-            self.summary_container,
-            self.chart_container,  # <<--- añadido al layout
+            self.main_row,
             self.output,
         ]
 
@@ -82,17 +105,19 @@ class VentasView(ft.Column):
             return
 
         if df is None:
-            self.summary_container.content = None
             self.output.value = "⚠ No hay datos cargados."
             self.page.update()
             return
 
         rows = df.rows()
-
         tabla = TablaResumen(rows)
         card = ResumenCard(promedio)
 
-        self.summary_container.content = ft.Column([tabla, card], spacing=20)
+        self.summary_container.content = ft.Column(
+            [tabla, card],
+            spacing=10,
+            expand=True,  # ← IMPORTANTE
+        )
         self.page.update()
 
     # 📈 Mostrar gráfico
@@ -104,13 +129,14 @@ class VentasView(ft.Column):
             self.page.update()
             return
 
-        if df is None or df.is_empty():
-            self.chart_container.content = None
-            self.output.value = "⚠ No hay datos para graficar."
+        if df is None:
+            self.chart_container.content = ft.Text("⚠ No hay datos cargados.")
+            self.output.value = "⚠ No hay datos cargados."
             self.page.update()
             return
 
         rows = df.rows()
+        grafico = GraficoVentas(rows)
 
-        self.chart_container.content = GraficoVentas(rows)
+        self.chart_container.content = grafico
         self.page.update()

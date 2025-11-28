@@ -17,16 +17,20 @@ HEADER_ALIASES = {
     "cliente": "client_name",
     "nombre cliente": "client_name",
     "nombre": "client_name",
+    "client_name": "client_name",  # ← AÑADE ESTA LÍNEA
     "identificador del cliente": "client_id",
     "cliente id": "client_id",
     "id cliente": "client_id",
     "identificador": "client_id",
+    "client_id": "client_id",  # ← AÑADE ESTA LÍNEA
     "tipo de producto": "product_type",
     "producto": "product_type",
     "tipo producto": "product_type",
     "tipo": "product_type",
+    "product_type": "product_type",  # ← AÑADE ESTA LÍNEA
     "precio": "price",
     "importe": "price",
+    "price": "price",  # ← AÑADE ESTA LÍNEA
     "fecha": "date",
     "date": "date",
 }
