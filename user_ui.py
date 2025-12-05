@@ -1,41 +1,81 @@
 import flet as ft
-from views.ventas_view import VentasView
 from views.dashboard_view import DashboardView
+from views.ventas_view import VentasView
 from views.clientes_view import ClientesView
-from db import init_db
+from theme import build_darkmode_button
 
 
 class FDTApp(ft.Column):
     def __init__(self, page: ft.Page):
-        super().__init__(expand=True)
+        super().__init__(expand=True, spacing=0)
         self.page = page
-
-        init_db()
-
-        # Crear vistas solo UNA vez
-        self.ventas_view = VentasView(page)
-        self.clientes_view = ClientesView(page)
-        self.dashboard_view = DashboardView(
-            page,
-            open_file_picker=self.ventas_view.open_file_picker,
-            go_to_ventas=lambda: self.go_to_tab(1),
-            go_to_clientes=lambda: self.go_to_tab(2),
-        )
+        self.ventas_view = None
 
         # Tabs principales
         self.tabs = ft.Tabs(
             selected_index=0,
-            expand=True,
             tabs=[
-                ft.Tab(text="Inicio", icon=ft.Icons.HOME, content=self.dashboard_view),
-                ft.Tab("Ventas", icon=ft.Icons.SHOW_CHART, content=self.ventas_view),
-                ft.Tab("Clientes", icon=ft.Icons.GROUP, content=self.clientes_view),
+                ft.Tab(text="Dashboard"),
+                ft.Tab(text="Ventas"),
+                ft.Tab(text="Clientes"),
             ],
+            on_change=self._on_tab_change,
         )
 
-        self.controls = [self.tabs]
+        # Botón de dark mode
+        self.dark_btn = build_darkmode_button(page)
 
-    # Método para cambiar de tab
-    def go_to_tab(self, index: int):
-        self.tabs.selected_index = index
+        # Barra superior: tabs + botón alineados (compacta)
+        self.top_bar = ft.Row(
+            [
+                self.tabs,
+                ft.Container(self.dark_btn),
+            ],
+            alignment=ft.MainAxisAlignment.START,
+            spacing=12,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
+        )
+
+        # Contenedor para la vista activa
+        self.content_container = ft.Container(expand=True)
+
+        self.controls = [
+            self.top_bar,
+            self.content_container,
+        ]
+
+        # Cargar la vista inicial
+        self._load_view(0)
+
+    def _on_tab_change(self, e):
+        self._load_view(e.control.selected_index)
+
+    def _load_view(self, index: int):
+        if index == 0:
+            view = DashboardView(
+                self.page,
+                open_file_picker=self._open_file_picker,
+                go_to_ventas=lambda: self._go_to_tab(1),
+                go_to_clientes=lambda: self._go_to_tab(2),
+            )
+        elif index == 1:
+            self.ventas_view = VentasView(self.page)
+            view = self.ventas_view
+        elif index == 2:
+            view = ClientesView(self.page)
+        else:
+            view = ft.Column([ft.Text("Vista no disponible")], expand=True)
+
+        self.content_container.content = view
         self.page.update()
+
+    def _open_file_picker(self):
+        """Abre el file picker desde dashboard."""
+        self._go_to_tab(1)
+        if self.ventas_view:
+            self.ventas_view.open_file_picker()
+
+    def _go_to_tab(self, tab_index: int):
+        """Cambia a un tab específico."""
+        self.tabs.selected_index = tab_index
+        self._load_view(tab_index)

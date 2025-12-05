@@ -1,47 +1,79 @@
 import sqlite3
 import polars as pl
 from db import DB_NAME
+from datetime import datetime, date
 
 
-def get_sales_summary():
+DB_NAME = "sales.db"
+
+
+def get_db_connection():
+    """Obtiene conexión a la base de datos SQLite."""
+    return sqlite3.connect(DB_NAME)
+
+
+def get_sales_summary(start_date=None, end_date=None):
     """
-    Devuelve:
-    - resumen: Polars DataFrame con total vendido por tipo de producto
-    - promedio: precio medio (ticket medio por venta)
+    Obtiene resumen de ventas agrupado por tipo de producto.
+    Retorna tuplas: (product_type, total_vendido)
     """
-
-    conn = sqlite3.connect(DB_NAME)
-
     try:
-        df = pl.read_database("SELECT * FROM sales", conn)
-    finally:
+        conn = get_db_connection()
+        
+        # Query: agrupar por product_type y sumar price
+        query = """
+        SELECT 
+            product_type, 
+            SUM(CAST(price AS REAL)) as total
+        FROM sales
+        """
+        
+        # Agregar filtros de fecha si existen
+        if start_date or end_date:
+            filters = []
+            if start_date:
+                filters.append(f"date >= '{start_date}'")
+            if end_date:
+                filters.append(f"date <= '{end_date}'")
+            query += " WHERE " + " AND ".join(filters)
+        
+        query += " GROUP BY product_type ORDER BY total DESC"
+        
+        df = pl.read_database(query, conn)
         conn.close()
-
-    if df.is_empty():
+        
+    except Exception as e:
+        print(f"Error leyendo datos: {e}")
         return None, None
 
-    # ----------------------------------------------------------
-    # Convertir date a tipo fecha (si existe la columna "date")
-    # ----------------------------------------------------------
-    if "date" in df.columns:
-        try:
-            df = df.with_columns(pl.col("date").str.strptime(pl.Date, strict=False))
-        except Exception:
-            # Si algún valor no se puede convertir, se ignora
-            pass
+    if df.is_empty():
+        print("⚠ No hay datos disponibles")
+        return None, None
 
-    # ----------------------------------------------------------
-    # Resumen: total vendido por tipo de producto
-    # ----------------------------------------------------------
-    resumen = (
-        df.group_by("product_type")
-        .agg(pl.sum("price").alias("total_vendido"))
-        .sort("product_type")
-    )
+    # Calcular promedio
+    try:
+        promedio = df.select(pl.col("total")).mean().item()
+    except Exception:
+        promedio = 0
 
-    # ----------------------------------------------------------
-    # Promedio general de ventas (ticket medio por venta)
-    # ----------------------------------------------------------
-    promedio = df["price"].mean()
+    return df, promedio
 
-    return resumen, promedio
+
+def get_date_range():
+    """Obtiene el rango de fechas disponibles en los datos."""
+    try:
+        conn = get_db_connection()
+        query = "SELECT MIN(date) as min_date, MAX(date) as max_date FROM sales"
+        df = pl.read_database(query, conn)
+        conn.close()
+
+        if df.is_empty():
+            return None, None
+
+        min_date = df.select(pl.col("min_date")).item()
+        max_date = df.select(pl.col("max_date")).item()
+
+        return min_date, max_date
+    except Exception as e:
+        print(f"Error obteniendo rango de fechas: {e}")
+        return None, None

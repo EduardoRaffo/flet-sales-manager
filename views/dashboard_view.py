@@ -1,5 +1,4 @@
 import flet as ft
-from theme import create_theme_toggle_button
 
 
 class DashboardView(ft.Column):
@@ -12,7 +11,6 @@ class DashboardView(ft.Column):
         self.go_to_clientes = go_to_clientes
 
         # Cuando cambiemos el tema, reconstruimos el dashboard
-        # (si en tu versión de Flet esto no existe, simplemente no hará nada malo)
         self.page.on_theme_changed = lambda _: self.build_ui()
 
         self.build_ui()
@@ -45,9 +43,7 @@ class DashboardView(ft.Column):
 
         colors = self._get_colors()
 
-        toggle_button = create_theme_toggle_button(self.page)
-
-        # Header con botón de tema
+        # Header sin botón de tema
         header_row = ft.Row(
             controls=[
                 ft.Text(
@@ -56,8 +52,6 @@ class DashboardView(ft.Column):
                     weight=ft.FontWeight.BOLD,
                     color=colors["text"],
                 ),
-                ft.Container(expand=True),
-                toggle_button,
             ],
             alignment=ft.MainAxisAlignment.START,
         )
