@@ -1,3 +1,4 @@
+import os
 import flet as ft
 
 
@@ -85,15 +86,39 @@ class DashboardView(ft.Column):
                         color=colors["text"],
                     ),
                     ft.Text(
-                        "Sube archivos CSV o Excel para analizarlos.",
+                        "Arrastra un archivo CSV aquí o haz clic para seleccionar.",
                         size=14,
                         color=colors["subtitle"],
                     ),
                 ],
                 spacing=10,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             ),
-            on_click=lambda _: self.open_file_picker(),
+            on_click=lambda _: self.open_file_picker(),  # ← AGREGAR self.
+            on_hover=self._on_tarjeta_hover,
         )
+
+        # Drag and drop handlers
+        def on_drag_over(e):
+            e.control.bgcolor = ft.Colors.with_opacity(0.3, colors["icon"])
+            e.control.update()
+
+        def on_drag_leave(e):
+            e.control.bgcolor = colors["bg_card"]
+            e.control.update()
+
+        def on_drop(e):
+            e.control.bgcolor = colors["bg_card"]
+            e.control.update()
+            
+            # En Flet desktop, el archivo viene en e.data como ruta
+            if e.data:
+                file_path = e.data.strip()
+                self._handle_dropped_file(file_path)
+
+        tarjeta_importar.on_drag_over = on_drag_over
+        tarjeta_importar.on_drag_leave = on_drag_leave
+        tarjeta_importar.on_drop = on_drop
 
         # --- Tarjeta Resumen ---
         tarjeta_resumen = ft.Container(
@@ -155,3 +180,32 @@ class DashboardView(ft.Column):
                 alignment=ft.MainAxisAlignment.SPACE_AROUND,
             ),
         ]
+
+    def _on_tarjeta_hover(self, e):
+        """Efecto hover en las tarjetas."""
+        if e.data == "true":
+            e.control.scale = 1.05
+        else:
+            e.control.scale = 1.0
+        e.control.update()
+
+    def _handle_dropped_file(self, file_path):
+        """Procesa el archivo arrastrado."""
+        import os
+        from importer import import_csv_to_db
+        
+        if not file_path or not os.path.exists(file_path):
+            print(f"❌ Archivo no válido: {file_path}")
+            return
+
+        # Validar que sea CSV o Excel
+        if not (file_path.endswith('.csv') or file_path.endswith('.xlsx')):
+            print(f"❌ Solo se aceptan archivos CSV o XLSX")
+            return
+
+        ok, msg = import_csv_to_db(file_path)
+        
+        if ok:
+            print(f"✅ {msg}")
+        else:
+            print(f"❌ {msg}")

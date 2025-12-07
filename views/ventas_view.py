@@ -79,12 +79,19 @@ class VentasView(ft.Column):
             wrap=True,
         )
 
+        # ============================================================
+        #       FILE PICKER  ← AGREGAR AQUÍ
+        # ============================================================
+
+        self.upload_picker = ft.FilePicker(on_result=self.handle_file)
+        page.overlay.append(self.upload_picker)
+
         # Estado del filtro (expandido/contraído)
-        self.filter_expanded = True
+        self.filter_expanded = False
 
         self.btn_toggle_filter = ft.IconButton(
-            icon=ft.Icons.EXPAND_LESS,
-            tooltip="Contraer filtros",
+            icon=ft.Icons.EXPAND_MORE,
+            tooltip="Expandir filtros",
             on_click=self._toggle_filter,
         )
 
@@ -118,7 +125,7 @@ class VentasView(ft.Column):
                 self.quick_buttons,
             ],
             spacing=15,
-            visible=True,
+            visible=False,
         )
 
         self.filter_card = ft.Container(
@@ -139,6 +146,13 @@ class VentasView(ft.Column):
             border_radius=12,
             bgcolor=self._get_filter_bgcolor(),
         )
+
+        # ============================================================
+        #       FILE PICKER
+        # ============================================================
+
+        self.upload_picker = ft.FilePicker(on_result=self.handle_file)
+        page.overlay.append(self.upload_picker)
 
         # ============================================================
         #       CONTENEDORES PRINCIPALES
