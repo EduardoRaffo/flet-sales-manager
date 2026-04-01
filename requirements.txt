@@ -1,0 +1,25 @@
+# TSS_FDT_Sales_Manager — Runtime Dependencies
+# Last updated: 2026-03-22
+# Target: Flet 0.81.0 + flet-charts 0.81.0 Desktop Application (UPGRADED)
+# Python: 3.13+
+
+# UI Framework — Flet Desktop (Material 3, Desktop-only)
+flet==0.82.0
+flet-desktop==0.82.0
+flet-charts==0.82.0
+
+# Data Analysis & Processing
+polars==1.35.2
+
+# Excel & CSV File Import
+openpyxl==3.1.5
+
+# Date Range & Temporal Calculations
+python-dateutil==2.9.0
+
+# Report Generation (HTML charts, embedding)
+matplotlib==3.10.8
+
+# Additional utilities (included with polars/matplotlib, but listed for clarity)
+pandas==2.2.3
+numpy==2.2.5

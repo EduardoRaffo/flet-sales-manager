@@ -1,0 +1,6 @@
+# TSS_FDT_Sales_Manager — Development Dependencies
+# For testing and development only, NOT required for runtime
+# Last updated: 2026-01-25
+
+# Testing Framework
+pytest>=7.0.0
