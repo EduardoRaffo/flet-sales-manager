@@ -7,6 +7,14 @@
 ![SQLite](https://img.shields.io/badge/SQLite-3-green?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
+## 🚀 What this project demonstrates
+
+- Data processing & analytics with Polars
+- Clean architecture (modular, scalable design)
+- ~400 automated tests with pytest
+- Real-world data handling (10K+ records)
+- Focus on performance and maintainability
+
 ## 🎯 Problem Statement
 
 Sales teams waste hours managing spreadsheets, tracking pipeline progress manually, and losing visibility into client relationships. **FDT Sales Manager** centralizes all sales data—clients, leads, sales history, and performance metrics—in a single, interactive desktop application with real-time analytics.
