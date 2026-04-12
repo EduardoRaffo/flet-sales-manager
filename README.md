@@ -2,10 +2,58 @@
 
 **Desktop CRM application for sales pipeline management, client tracking, and lead analysis — built with Python + Flet**
 
-![Python](https://img.shields.io/badge/Python-3.13+-blue?style=flat-square)
-![Flet](https://img.shields.io/badge/Flet-0.82.0+-purple?style=flat-square)
-![SQLite](https://img.shields.io/badge/SQLite-3-green?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.13+-blue?style=flat-square) ![Flet](https://img.shields.io/badge/Flet-0.82.0+-purple?style=flat-square) ![SQLite](https://img.shields.io/badge/SQLite-3-green?style=flat-square) ![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
+
+---
+
+## 📸 Screenshots
+
+### Dashboard
+| Light Mode | Dark Mode |
+|:---:|:---:|
+| ![Dashboard con datos](screenshots/Captura%20de%20pantalla%202026-04-12%20113431.png) | ![Dashboard dark mode](screenshots/Captura%20de%20pantalla%202026-04-12%20113534.png) |
+| *Panel principal con datos cargados* | *Modo oscuro* |
+
+### Import & Data Loading
+| Import Preview | Empty State |
+|:---:|:---:|
+| ![Importación](screenshots/Captura%20de%20pantalla%202026-04-12%20113437.png) | ![Sin datos](screenshots/Captura%20de%20pantalla%202026-04-12%20113520.png) |
+| *Vista previa de importación MIXTO* | *Estado inicial sin datos* |
+
+### Sales Analytics
+| Filters & Period Comparison | Sales Charts |
+|:---:|:---:|
+| ![Ventas filtros](screenshots/Captura%20de%20pantalla%202026-04-12%20113514.png) | ![Ventas gráficos](screenshots/Captura%20de%20pantalla%202026-04-12%20113915.png) |
+| *Filtros avanzados y comparativa de periodos* | *Gráficos por cliente y producto* |
+
+| Period A vs B | Product Distribution |
+|:---:|:---:|
+| ![Comparación AB](screenshots/Captura%20de%20pantalla%202026-04-12%20113909.png) | ![Distribución productos](screenshots/Captura%20de%20pantalla%202026-04-12%20113944.png) |
+| *Comparación entre periodos con delta* | *Distribución de ventas por producto* |
+
+### Lead Management
+| Lead Funnel | Marketing Performance |
+|:---:|:---:|
+| ![Lead funnel](screenshots/Captura%20de%20pantalla%202026-04-12%20113903.png) | ![Marketing performance](screenshots/Captura%20de%20pantalla%202026-04-12%20113852.png) |
+| *Funnel Lead → Reunión → Cliente* | *Performance por fuente (Meta, LinkedIn, Google)* |
+
+| Marketing Investment | ROI by Source |
+|:---:|:---:|
+| ![Inversión marketing](screenshots/Captura%20de%20pantalla%202026-04-12%20113857.png) | ![Leads filtros](screenshots/Captura%20de%20pantalla%202026-04-12%20113502.png) |
+| *Gestión de inversión de marketing* | *Filtros globales de leads* |
+
+### Client Management
+| Client List | Client Detail |
+|:---:|:---:|
+| ![Lista clientes](screenshots/Captura%20de%20pantalla%202026-04-12%20113847.png) | ![Detalle cliente](screenshots/Captura%20de%20pantalla%202026-04-12%20113842.png) |
+| *Gestión de clientes con historial* | *Perfil completo con estadísticas* |
+
+| Edit Client | Delete Confirmation | Empty State |
+|:---:|:---:|:---:|
+| ![Editar cliente](screenshots/Captura%20de%20pantalla%202026-04-12%20113827.png) | ![Eliminar confirmación](screenshots/Captura%20de%20pantalla%202026-04-12%20113539.png) | ![Sin clientes](screenshots/Captura%20de%20pantalla%202026-04-12%20113454.png) |
+| *Formulario de edición* | *Diálogo de confirmación* | *Estado vacío con CTA* |
+
+---
 
 ## 🚀 What this project demonstrates
 
@@ -60,7 +108,7 @@ Building a full desktop CRM from scratch in Python required solving real softwar
 ## 🛠️ Tech Stack
 
 | Component | Technology | Version |
-|-----------|-----------|---------| 
+|-----------|-----------|---------|
 | **Framework** | Flet (Flutter Desktop) | 0.82.0 |
 | **Language** | Python | 3.13+ |
 | **Database** | SQLite3 | Built-in |
@@ -80,7 +128,6 @@ python main.py
 ```
 
 ### First Run
-
 1. Application creates `sales.db` automatically on first launch
 2. Use **Import** to load sample data from CSV/Excel
 3. Navigate dashboard → sales → clients → leads tabs
@@ -132,30 +179,31 @@ Tests cover: analysis layer calculations (Polars), service orchestration, import
 
 ## 🏆 Project Highlights
 
-✅ **Clean Architecture**: 10-layer separation with zero upward dependencies
-✅ **Comprehensive Testing**: ~400 pytest tests covering all business logic
-✅ **Professional UI**: Desktop-first design with theme support
-✅ **Real-time Analytics**: Polars-powered metrics recalculation on filter change
-✅ **Scalable**: Handles 10K+ sales records with sub-second response times
+✅ **Clean Architecture**: 10-layer separation with zero upward dependencies  
+✅ **Comprehensive Testing**: ~400 pytest tests covering all business logic  
+✅ **Professional UI**: Desktop-first design with theme support  
+✅ **Real-time Analytics**: Polars-powered metrics recalculation on filter change  
+✅ **Scalable**: Handles 10K+ sales records with sub-second response times  
 
 ## 📝 Project Structure
 
 ```
 flet-sales-manager/
-├── main.py             # Application entry point
-├── requirements.txt    # Dependencies
-├── sales.db            # SQLite database (auto-created)
-├── analysis/           # Metrics calculation (Polars)
-├── components/         # 25+ Flet widgets
-├── controllers/        # Input validation & coordination
-├── core/               # Database, import, utilities
-├── domain/             # Pure data models
-├── services/           # Analysis orchestration
-├── theme/              # Color system & theming
-├── ui/                 # Navigation & routing
-├── views/              # Dashboard, sales, clients, leads
-├── reports/            # HTML report generation
-└── tests/              # ~400 pytest tests
+├── main.py                # Application entry point
+├── requirements.txt       # Dependencies
+├── sales.db               # SQLite database (auto-created)
+├── screenshots/           # App screenshots
+├── analysis/              # Metrics calculation (Polars)
+├── components/            # 25+ Flet widgets
+├── controllers/           # Input validation & coordination
+├── core/                  # Database, import, utilities
+├── domain/                # Pure data models
+├── services/              # Analysis orchestration
+├── theme/                 # Color system & theming
+├── ui/                    # Navigation & routing
+├── views/                 # Dashboard, sales, clients, leads
+├── reports/               # HTML report generation
+└── tests/                 # ~400 pytest tests
 ```
 
 ## 📄 License
@@ -164,7 +212,7 @@ MIT License - free for personal and commercial use.
 
 ## 👤 Author
 
-**Eduardo Raffo** - Python Developer
+**Eduardo Raffo** - Python Developer  
 - GitHub: [github.com/EduardoRaffo](https://github.com/EduardoRaffo)
 - LinkedIn: [linkedin.com/in/eduardo-raffo-benitez](https://linkedin.com/in/eduardo-raffo-benitez)
 
