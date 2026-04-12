@@ -9,49 +9,39 @@
 ## 📸 Screenshots
 
 ### Dashboard
-| Light Mode | Dark Mode |
-|:---:|:---:|
-| ![Dashboard con datos](screenshots/Captura%20de%20pantalla%202026-04-12%20113431.png) | ![Dashboard dark mode](screenshots/Captura%20de%20pantalla%202026-04-12%20113534.png) |
-| *Panel principal con datos cargados* | *Modo oscuro* |
+| Empty State | With Data | Dark Mode |
+|:---:|:---:|:---:|
+| ![Dashboard vacío](screenshots/Captura%20de%20pantalla%202026-04-12%20113431.png) | ![Dashboard con datos](screenshots/Captura%20de%20pantalla%202026-04-12%20113520.png) | ![Dashboard modo oscuro](screenshots/Captura%20de%20pantalla%202026-04-12%20113944.png) |
+| *Estado inicial sin datos* | *Panel principal con 6 ventas y 6 leads activos* | *Modo oscuro con datos cargados* |
 
-### Import & Data Loading
-| Import Preview | Empty State |
-|:---:|:---:|
-| ![Importación](screenshots/Captura%20de%20pantalla%202026-04-12%20113437.png) | ![Sin datos](screenshots/Captura%20de%20pantalla%202026-04-12%20113520.png) |
-| *Vista previa de importación MIXTO* | *Estado inicial sin datos* |
+### Data Import
+| Import Preview |
+|:---:|
+| ![Importación MIXTO](screenshots/Captura%20de%20pantalla%202026-04-12%20113514.png) |
+| *Vista previa de importación — 12 filas válidas formato MIXTO* |
 
 ### Sales Analytics
-| Filters & Period Comparison | Sales Charts |
-|:---:|:---:|
-| ![Ventas filtros](screenshots/Captura%20de%20pantalla%202026-04-12%20113514.png) | ![Ventas gráficos](screenshots/Captura%20de%20pantalla%202026-04-12%20113915.png) |
-| *Filtros avanzados y comparativa de periodos* | *Gráficos por cliente y producto* |
-
-| Period A vs B | Product Distribution |
-|:---:|:---:|
-| ![Comparación AB](screenshots/Captura%20de%20pantalla%202026-04-12%20113909.png) | ![Distribución productos](screenshots/Captura%20de%20pantalla%202026-04-12%20113944.png) |
-| *Comparación entre periodos con delta* | *Distribución de ventas por producto* |
+| Period Filters & Comparison | Sales by Client (Bar Chart) | Product Distribution (Donut) | Period A vs B Comparison |
+|:---:|:---:|:---:|:---:|
+| ![Ventas filtros](screenshots/Captura%20de%20pantalla%202026-04-12%20113437.png) | ![Ventas barras](screenshots/Captura%20de%20pantalla%202026-04-12%20113539.png) | ![Distribución productos](screenshots/Captura%20de%20pantalla%202026-04-12%20113534.png) | ![Comparación A vs B](screenshots/Captura%20de%20pantalla%202026-04-12%20113827.png) |
+| *Filtros avanzados y comparativa de periodos (sin datos)* | *Gráficos de barras por cliente y evolución temporal* | *Donut: Producto A 63%, B 26%, C 11% — top clientes por volumen* | *Comparación Empresa Beta (1.900€) vs Empresa Delta (720€)* |
 
 ### Lead Management
-| Lead Funnel | Marketing Performance |
-|:---:|:---:|
-| ![Lead funnel](screenshots/Captura%20de%20pantalla%202026-04-12%20113903.png) | ![Marketing performance](screenshots/Captura%20de%20pantalla%202026-04-12%20113852.png) |
-| *Funnel Lead → Reunión → Cliente* | *Performance por fuente (Meta, LinkedIn, Google)* |
+| Lead Funnel | Marketing Performance | Marketing Investment |
+|:---:|:---:|:---:|
+| ![Lead funnel](screenshots/Captura%20de%20pantalla%202026-04-12%20113842.png) | ![Marketing performance](screenshots/Captura%20de%20pantalla%202026-04-12%20113847.png) | ![Inversión marketing](screenshots/Captura%20de%20pantalla%202026-04-12%20113852.png) |
+| *Funnel con datos: 6 leads → 2 reuniones, 33% conversión, 4.7 días promedio* | *Performance por fuente: Google, LinkedIn, Meta* | *Gestión de inversión de marketing por fuente* |
 
-| Marketing Investment | ROI by Source |
-|:---:|:---:|
-| ![Inversión marketing](screenshots/Captura%20de%20pantalla%202026-04-12%20113857.png) | ![Leads filtros](screenshots/Captura%20de%20pantalla%202026-04-12%20113502.png) |
-| *Gestión de inversión de marketing* | *Filtros globales de leads* |
+| Global Filters (Empty State) |
+|:---:|
+| ![Leads filtros vacíos](screenshots/Captura%20de%20pantalla%202026-04-12%20113454.png) |
+| *Filtros globales de leads — estado inicial sin datos* |
 
 ### Client Management
-| Client List | Client Detail |
-|:---:|:---:|
-| ![Lista clientes](screenshots/Captura%20de%20pantalla%202026-04-12%20113847.png) | ![Detalle cliente](screenshots/Captura%20de%20pantalla%202026-04-12%20113842.png) |
-| *Gestión de clientes con historial* | *Perfil completo con estadísticas* |
-
-| Edit Client | Delete Confirmation | Empty State |
-|:---:|:---:|:---:|
-| ![Editar cliente](screenshots/Captura%20de%20pantalla%202026-04-12%20113827.png) | ![Eliminar confirmación](screenshots/Captura%20de%20pantalla%202026-04-12%20113539.png) | ![Sin clientes](screenshots/Captura%20de%20pantalla%202026-04-12%20113454.png) |
-| *Formulario de edición* | *Diálogo de confirmación* | *Estado vacío con CTA* |
+| Client List | Client Detail | Edit Client | Delete Confirmation | Empty State |
+|:---:|:---:|:---:|:---:|:---:|
+| ![Lista clientes](screenshots/Captura%20de%20pantalla%202026-04-12%20113857.png) | ![Detalle cliente](screenshots/Captura%20de%20pantalla%202026-04-12%20113903.png) | ![Editar cliente](screenshots/Captura%20de%20pantalla%202026-04-12%20113909.png) | ![Eliminar confirmación](screenshots/Captura%20de%20pantalla%202026-04-12%20113915.png) | ![Sin clientes](screenshots/Captura%20de%20pantalla%202026-04-12%20113502.png) |
+| *Lista de clientes: Alpha, Beta, Gamma, Delta con totales* | *Perfil Empresa Alpha — 2 ventas, 2.600€, historial completo* | *Formulario de edición de cliente* | *Diálogo de confirmación de eliminación (modo oscuro)* | *Estado vacío — sin clientes registrados* |
 
 ---
 
