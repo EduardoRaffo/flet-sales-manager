@@ -80,7 +80,7 @@ Building a full desktop CRM from scratch in Python required solving real softwar
 ## 🏗️ Architecture
 
 ```
-10-Layer Clean Architecture
+Layered Architecture (10 layers)
 ├── Layer 10: main.py (initialization)
 ├── Layer 9: ui/ (routing & navigation)
 ├── Layer 8: views/ (dashboard, sales, clients, leads)
@@ -169,7 +169,7 @@ Tests cover: analysis layer calculations (Polars), service orchestration, import
 
 ## 🏆 Project Highlights
 
-✅ **Clean Architecture**: 10-layer separation, with dependencies flowing downward by design  
+✅ **Layered Architecture**: 10-layer separation, with dependencies flowing downward  
 ✅ **Comprehensive Testing**: ~400 pytest tests covering analysis, services, import validation and date filtering  
 ✅ **Professional UI**: Desktop-first design with theme support  
 ✅ **Real-time Analytics**: Polars-powered metrics recalculation on filter change  
