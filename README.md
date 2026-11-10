@@ -48,10 +48,10 @@
 ## 🚀 What this project demonstrates
 
 - Data processing & analytics with Polars
-- Clean architecture (modular, scalable design)
+- Layered architecture (modular design)
 - ~400 automated tests with pytest
-- Real-world data handling (10K+ records)
-- Focus on performance and maintainability
+- Sales data import, validation and analysis
+- Focus on maintainability and testability
 
 ## 🎯 Problem Statement
 
@@ -93,7 +93,7 @@ Building a full desktop CRM from scratch in Python required solving real softwar
 └── Layer 1: sales.db (SQLite persistence)
 ```
 
-**Key principle**: Zero upward dependencies. Layering enforces clean separation of concerns.
+**Key principle**: Dependencies flow downward by design. Layering keeps concerns cleanly separated.
 
 ## 🛠️ Tech Stack
 
@@ -169,11 +169,11 @@ Tests cover: analysis layer calculations (Polars), service orchestration, import
 
 ## 🏆 Project Highlights
 
-✅ **Clean Architecture**: 10-layer separation with zero upward dependencies  
-✅ **Comprehensive Testing**: ~400 pytest tests covering all business logic  
+✅ **Clean Architecture**: 10-layer separation, with dependencies flowing downward by design  
+✅ **Comprehensive Testing**: ~400 pytest tests covering analysis, services, import validation and date filtering  
 ✅ **Professional UI**: Desktop-first design with theme support  
 ✅ **Real-time Analytics**: Polars-powered metrics recalculation on filter change  
-✅ **Scalable**: Handles 10K+ sales records with sub-second response times  
+✅ **Modular**: Layered structure that makes adding new views and analyses straightforward  
 
 ## 📝 Project Structure
 
